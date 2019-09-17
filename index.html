@@ -21,14 +21,15 @@
                     <div class="col-md-12">
                         <p class="text-center"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHJvbGU9ImltZyI+PGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9InJlZCIgLz48L3N2Zz4=" width="10px" height="10px"> UPC <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHJvbGU9ImltZyI+PGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9ImdyZWVuIiAvPjwvc3ZnPg==" width="10px" height="10px"> UPV</p>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="gameLog" lang="zh" v-model="file">
+                            <input type="file" class="custom-file-input" id="gameLog" lang="zh" @change="tsvFileChange">
                             <label class="custom-file-label" for="gameLog">game_log.tsv</label>
                         </div>
                         <div class="my-4"></div>
-                        <l-map style="height: 500px; width: 100%" :zoom="zoom" :center="center">
+                        <l-map style="height: 450px; width: 100%" :zoom="zoom" :center="center">
                             <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
                             <l-marker v-for="marker in markers" :key="marker.id" :visible="marker.visible" :draggable="marker.draggable" :lat-lng.sync="marker.position" :icon="marker.icon"></l-marker>
                         </l-map>
+                        <p class="text-center"><a href="https://github.com/BANKA2017/INGRESS_UPC_UPV_MAP" target="_blank">GitHub</a></p>
                     </div>
                 </div>
             </div>
@@ -42,36 +43,33 @@
         <script src="./static/js/vue2-leaflet.min.js"></script>
         <script>
             'use strict';
-            Vue.component('l-map', Vue2Leaflet.LMap)
-            Vue.component('l-tile-layer', Vue2Leaflet.LTileLayer)
-            Vue.component('l-marker', Vue2Leaflet.LMarker)
+            Vue.component('l-map', Vue2Leaflet.LMap);
+            Vue.component('l-tile-layer', Vue2Leaflet.LTileLayer);
+            Vue.component('l-marker', Vue2Leaflet.LMarker);
             var ingress = new Vue({
                 el: "#app",
                 data: {
-                    file: '',
-                    text: '',
                     url: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',//osm
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                     zoom: 2,
                     center: [0, 0],
                     markers: [],
                 },
-                watch: {
-                    "file": function() {
+                methods: {
+                    tsvFileChange: function (e) {
                         this.markers = [];
-                        if(this.file.length){
+                        let files = e.target.files || e.dataTransfer.files;
+                        if(files.length){
                             this.createMap();
-                            this.noty('处理完成');
                         }else{
-                            this.noty('已清空');
+                            this.noty('清理完成');
                         }
                     },
-                },
-                methods: {
                     createMap: function () {
                         let oFReader = new FileReader();
                         let oFile = document.getElementById("gameLog").files[0];
-                        if (!/\.tsv$/.test(oFile.name)) { this.noty('请选择正确的文件', 'error'); return; }
+                        if (!/\.tsv$/.test(oFile.name)) { this.noty('请选择文件 <strong>game_log.tsv</strong>', 'error'); return; }
+                        this.noty('处理完成');
                         oFReader.readAsText(oFile);
                         oFReader.onload = (e) => {
                             const regex = /\t([0-9\.]+)\t([0-9\.]+)\t(hacked friendly portal|hacked enemy portal|created link|mod deployed|resonator deployed|resonator upgraded|captured portal)/gm;//upc&upv
@@ -94,11 +92,11 @@
                     },
                     noty: function(text, type='success'){
                         new Noty({
-                                timeout: 3000,
-                                theme: 'metroui',
-                                type: type,
-                                text: text,
-                            }).show();
+                            timeout: 3000,
+                            theme: 'metroui',
+                            type: type,
+                            text: text,
+                        }).show();
                     },
                     unique: function (arr) {
                         let isUPC = false;
@@ -111,9 +109,7 @@
                                     }else{
                                         isUPC = true;
                                     }
-                                    
                                 }
-                                
                             }
                             if(isUPC){
                                 arr.splice(i, 1);
@@ -128,7 +124,7 @@
                             iconUrl: 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" role="img"><circle cx="' + size + '" cy="' + size + '" r="' + size + '" fill="' + color + '" /></svg>'),
                             iconSize: [size * 2, size * 2],
                         })
-                    }
+                    },
                 }
             })
         </script>
