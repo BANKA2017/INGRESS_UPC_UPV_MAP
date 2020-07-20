@@ -3,12 +3,14 @@
     <head>
         <meta name="robots" content="nofollow">
         <meta charset="utf-8">
-        <link rel="shortcut icon" href="./static/img/favicon.png">
+        <link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxMi42NnB4IiBoZWlnaHQ9IjE0LjRweCIgdmlld0JveD0iMCAwIDEyLjY2IDE0LjQiPjxwYXRoIGQ9Ik0xMi42NiwzLjkzdjYuNTRjMCwwLjI2LTAuMTEsMC40NS0wLjMzLDAuNTdsLTUuNjcsMy4yN2MtMC4yMiwwLjEyLTAuNDQsMC4xMi0wLjY2LDBsLTUuNjctMy4yNyBDMC4xMSwxMC45MiwwLDEwLjczLDAsMTAuNDdWMy45M2MwLTAuMjYsMC4xMS0wLjQ1LDAuMzMtMC41N0w2LDAuMDljMC4yMi0wLjEyLDAuNDQtMC4xMiwwLjY2LDBsNS42NywzLjI3IEMxMi41NSwzLjQ4LDEyLjY2LDMuNjcsMTIuNjYsMy45M3ogTTExLjczLDEwLjY4TDkuMzksOS4zM2wwLjMtMC41NGwyLjM0LDEuMzVWMy45M0wxMiwzLjlMNi42MywwLjc4djIuN2gtMC42di0yLjdMMC42MywzLjl2MC4wMyB2Ni4yMWwyLjM0LTEuMzVsMC4zLDAuNTRsLTIuMzQsMS4zNWw1LjM3LDMuMDloMC4wNkwxMS43MywxMC42OHogTTEuODYsNC42MDVjMC0wLjAxLDAuMDEtMC4wMTUsMC4wMy0wLjAxNWg4Ljg4IGMwLjAyLDAuMDEsMC4wMywwLjAxNSwwLjAzLDAuMDE1VjQuNjVsLTQuNDQsNy42OGMwLDAuMDItMC4wMSwwLjAzLTAuMDMsMC4wM1M2LjMsMTIuMzUsNi4zLDEyLjMzTDEuODYsNC42NVY0LjYwNXogTTYuMDMsNy42NSBjMC0wLjE4LTAuMDktMC4zMi0wLjI3LTAuNDJMMy4yNyw1Ljc5SDMuMjR2MC4wM0w2LDEwLjU2YzAuMDIsMCwwLjAzLTAuMDEsMC4wMy0wLjAzVjcuNjV6IE02LjU3LDYuNjlsMi41Mi0xLjQ3bDAsMEgzLjZIMy41NyBMMy42LDUuMjVsMi40OSwxLjQ0QzYuMjUsNi43OSw2LjQxLDYuNzksNi41Nyw2LjY5eiBNOS40Miw1LjgyVjUuNzlIOS4zOUw2LjksNy4yM2MtMC4xOCwwLjEtMC4yNywwLjI1LTAuMjcsMC40NXYyLjg4aDAuMDNoMC4wMyBMOS40Miw1LjgyeiIvPjwvc3ZnPg0K">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="author" content="Banka2017 (https://ingress.ailand.date)">
         <meta name="keywords" content="INGRESS">
         <title>INGRESS UPC/UPV MAP</title>
-        <link href="./static/css/bootstrap.min.css" rel="stylesheet preload" as="style">
+        <!--load css and js-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css,npm/noty@3.2.0-beta/lib/noty.min.css,npm/leaflet@1.6.0/dist/leaflet.min.css">
+        <script src="https://cdn.jsdelivr.net/combine/npm/vue@2.6.11,npm/noty@3.2.0-beta,npm/leaflet@1.6.0/dist/leaflet.min.js,npm/vue2-leaflet@2.5.2/dist/vue2-leaflet.min.js"></script>
     </head>
     <body>
         <div id="app">
@@ -34,13 +36,6 @@
                 </div>
             </div>
         </div>
-        <!--load css and js-->
-        <link rel="stylesheet" href="./static/css/noty.css">
-        <link rel="stylesheet" href="./static/css/leaflet.css">
-        <script src="./static/js/vue.min.js"></script>
-        <script src="./static/js/noty.min.js"></script>
-        <script src="./static/js/leaflet.js"></script>
-        <script src="./static/js/vue2-leaflet.min.js"></script>
         <script>
             'use strict';
             Vue.component('l-map', Vue2Leaflet.LMap);
